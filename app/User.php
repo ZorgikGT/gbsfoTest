@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Book::class);
     }
+
+    public function setPassword(string $password)
+    {
+        $this->fillable['password'] = $password;
+    }
 }
