@@ -38,12 +38,13 @@
 </template>
 <script>
     export default {
-        mounted() {
+        created() {
+            console.log('it works');
             let app = this;
             let id = app.$route.params.id;
             app.userId = id;
 
-            axios.get('/api/user' + id)
+            axios.get('/api/user/' + id)
                 .then(function (resp) {
                     app.user = resp.data;
                 })
@@ -61,18 +62,18 @@
             }
         },
         methods: {
-            saveForm(event) {
+            saveForm() {
                 event.preventDefault();
                 let app = this;
                 let newUser = app.user;
 
                 axios.put('/api/user/' + app.userId, newUser)
                     .then(function (resp) {
-                        // app.$router.replace('/');
+                        app.$router.replace('/');
                         // app.$router.push({path: '/'});
                     })
                     .catch(function (resp) {
-                        // console.log(resp);
+                        console.log(resp);
                         alert("Could not edit user");
                     });
             }

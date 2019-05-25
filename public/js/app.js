@@ -1905,11 +1905,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
+  created: function created() {
+    console.log('it works');
     var app = this;
     var id = app.$route.params.id;
     app.userId = id;
-    axios.get('/api/user' + id).then(function (resp) {
+    axios.get('/api/user/' + id).then(function (resp) {
       app.user = resp.data;
     })["catch"](function () {
       alert("Could not load user");
@@ -1925,14 +1926,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    saveForm: function saveForm(event) {
+    saveForm: function saveForm() {
       event.preventDefault();
       var app = this;
       var newUser = app.user;
-      axios.put('/api/user/' + app.userId, newUser).then(function (resp) {// app.$router.replace('/');
-        // app.$router.push({path: '/'});
+      axios.put('/api/user/' + app.userId, newUser).then(function (resp) {
+        app.$router.replace('/'); // app.$router.push({path: '/'});
       })["catch"](function (resp) {
-        // console.log(resp);
+        console.log(resp);
         alert("Could not edit user");
       });
     }
@@ -2009,7 +2010,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteEntry: function deleteEntry(id, index) {
       if (confirm("Do you really want to delete it?")) {
         var app = this;
-        axios["delete"]('/api/user' + id).then(function (resp) {
+        axios["delete"]('/api/user/' + id).then(function (resp) {
           app.users.splice(index, 1);
         })["catch"](function (resp) {
           alert("Could not delete user");

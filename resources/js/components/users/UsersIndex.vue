@@ -60,7 +60,7 @@
             deleteEntry(id, index) {
                 if (confirm("Do you really want to delete it?")) {
                     let app = this;
-                    axios.delete('/api/user' + id)
+                    axios.delete('/api/user/' + id)
                         .then(function (resp) {
                             app.users.splice(index, 1);
                         })
